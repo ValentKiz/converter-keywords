@@ -1,0 +1,142 @@
+// @import 'libs/bootstrap-reboot.min';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.container {
+	width: 1140px;
+	margin: 0 auto;
+}
+
+.table {
+	margin: 0 auto;
+	margin-top: 15px;
+	border-collapse: collapse;
+	border-radius: 10px;
+	max-width: 500px;
+	&-example {
+		max-width: 400px;
+	}
+	&__header {
+		background: #AFCDE7;
+		color: white;
+		border-style: solid;
+		border-width: 0 0 1px 0;
+		border-color: white;
+		padding: 10px 20px;
+	}
+	&__data {
+		background: #D8E6F3;
+		border-style: solid;
+		border-width: 0 0 1px 0;
+		border-color: white;
+		padding: 10px 20px;
+		&-last {
+			border-bottom: 5px solid #0091C8;
+		}
+	}
+}
+
+.form {
+	&__inner {
+		margin: 0 auto;
+		margin-top: 50px;
+		display: flex;
+		flex-direction: column;
+	}
+	&__btn {
+		cursor: pointer;
+		display: block;
+		margin: 0 auto;
+		margin-top: 30px;
+		color: #fff;
+		padding: 15px 20px;
+		background: #0091C8;
+		border-radius: 32px;
+		border: none;
+		font-size: 20px;
+		&:hover {
+			background: #2395e1;
+			transform: scale(1.1);
+		}
+	}
+	&__selects {
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+	}
+	&__select {
+		margin-top: 30px;
+		cursor: pointer;
+		color: #fff;
+		background-color:#025b7e;
+		border: none;
+		height: 40px;
+		border-radius: 32px;
+		text-align: center;
+		font-size: 16px;
+		&:hover {
+			background: #2395e1;
+		}
+	}
+	&__textarea {
+		margin-top: 40px;
+		min-width: 150px;
+		max-width: 500px;
+		width: 100%;
+		min-height: 200px;
+		// resize : none;
+	}
+	&__checkboxes {
+		display: block;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 20px;
+		input {
+			width: 20px;
+			height: 20px;
+			margin: 0 5px;
+		}
+	}
+}
+
+.result {
+	margin-top: 40px;
+	padding-bottom: 50px;
+	&__inner {
+		display: flex;
+		justify-content: space-around;
+	}
+	&__subtitle {
+		text-align: center;
+	}
+	&__table {
+		margin-top: 40px;
+	}
+	&__textarea {
+		margin-top: 40px;
+		min-width: 150px;
+		max-width: 500px;
+		width: 100%;
+		min-height: 200px;
+		// resize : none;
+	}
+}
+
+.hide {
+	display: none;
+}
+
+@import 'media';
+
+
+
