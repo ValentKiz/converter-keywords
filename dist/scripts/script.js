@@ -1,91 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
 	"use strict";
 
-	const form = document.querySelector('form'),
-				textArea = document.querySelector('.form__textarea'),
-				formBtn = form.querySelector('.form__btn'),
-				// firstCheckbox = form.querySelector('#first'),
-				// secondCheckbox = form.querySelector('#second'),
-				// thirdCheckbox = form.querySelector('#third'),
-				// fourthCheckbox = form.querySelector('#fourth'),
-				// fifthCheckbox = form.querySelector('#fifth'),
-				selects = form.querySelectorAll('select'),
-				table = document.querySelector('.result__table'),
-				tBody = table.querySelector('tbody');
-
-	function createRow(func, item) {
-		let tr = document.createElement('tr'),
-				td = document.createElement('td');
-				tr.appendChild(td);
-				tBody.appendChild(tr);
-				tr.classList.add('table__row');
-				tr.classList.add('result__row');
-				td.classList.add('table__data');
-
-				td.textContent = `${func(item)}`;
-	}
-
-	let arrText = [];
-
-	textArea.value = `первая строка ключевых строк \nвторая строка ключевых слов`;
-
-	formBtn.addEventListener('click', (e) => {
-		e.preventDefault();
-
-		document.querySelectorAll('.result__row').forEach(item => item.remove());
-
-		arrText = textArea.value.split(/\r?\n/).forEach(item => {
-
-			selects.forEach(select => {
-				switch (select.value) {
-					case 'first': 
-						createRow(first, item);
-						break;
-					case 'second': 
-						createRow(second, item);
-						break;
-					case 'third': 
-						createRow(third, item);
-						break;
-					case 'fourth': 
-						createRow(fourth, item);
-						break;
-					case 'fifth': 
-						createRow(fifth, item);
-						break;
-					case 'none': return;
-				}
-			});
-
-			let allTd = table.querySelectorAll('.result__row');
-			if (allTd.length > 0) {
-				allTd[allTd.length-1].classList.add('table__data-last');
-			}
-
-			
-
-			// if (firstCheckbox.checked) {
-			// 	createRow(first, item);
-			// }
-
-			// if (secondCheckbox.checked) {
-			// 	createRow(second, item);
-			// }
-
-			// if (thirdCheckbox.checked) {
-			// 	createRow(third, item);
-			// }
-
-			// if (fourthCheckbox.checked) {
-			// 	createRow(fourth, item);
-			// }
-
-			// if (fifthCheckbox.checked) {
-			// 	createRow(fifth, item);
-			// }
-		});
-	});
-
 	function first(row) {
 		return "\"" + row.split(' ').map((item) => '!' + item).join(' ') + "\"";
 	}
@@ -105,4 +20,52 @@ window.addEventListener('DOMContentLoaded', () => {
 	function fifth(row) {
 		return "\"" + row + "\"";
 	}
+
+	const inputForm = document.querySelector('form'),
+				inputText = document.querySelector('.form__textarea'),
+				inputBtn = inputForm.querySelector('.form__btn'),
+				selects = inputForm.querySelectorAll('select'),
+				outputText = document.querySelector('.result__textarea'),
+				copyBtn = document.querySelector('.result__btn');
+	
+	inputText.value = `первая строка ключевых строк\nвторая строка ключевых слов`;
+	outputText.value = ''; // text
+
+	inputBtn.addEventListener('click', (e) => {
+		e.preventDefault();
+
+		outputText.value = ''; // text
+
+		inputText.value.split(/\r?\n/).forEach(item => {
+
+			selects.forEach(select => {
+				switch (select.value) {
+					case 'first': 
+						outputText.value += first(item) + `\n`; // text
+						break;
+					case 'second': 
+						outputText.value += second(item) + `\n`; // text
+						break;
+					case 'third': 
+						outputText.value += third(item) + `\n`; // text
+						break;
+					case 'fourth': 
+						outputText.value += fourth(item) + `\n`; // text
+						break;
+					case 'fifth': 
+						outputText.value += fifth(item) + `\n`; // text
+						break;
+					case 'none': return;
+				}
+			});
+		});
+	});
+
+	copyBtn.addEventListener('click', (e) => {
+		e.preventDefault();
+
+		outputText.select();
+		
+		document.execCommand("copy");
+	});
 });

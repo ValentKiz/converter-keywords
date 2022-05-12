@@ -17,6 +17,22 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0 auto;
 }
 
+.btn {
+	cursor: pointer;
+	display: block;
+	margin: 0 auto;
+	color: #fff;
+	padding: 15px 20px;
+	background: #0091C8;
+	border-radius: 32px;
+	border: none;
+	font-size: 20px;
+	&:hover {
+		background: #2395e1;
+		transform: scale(1.1);
+	}
+}
+
 .table {
 	margin: 0 auto;
 	margin-top: 15px;
@@ -54,20 +70,7 @@ h1, h2, h3, h4, h5, h6 {
 		flex-direction: column;
 	}
 	&__btn {
-		cursor: pointer;
-		display: block;
-		margin: 0 auto;
 		margin-top: 30px;
-		color: #fff;
-		padding: 15px 20px;
-		background: #0091C8;
-		border-radius: 32px;
-		border: none;
-		font-size: 20px;
-		&:hover {
-			background: #2395e1;
-			transform: scale(1.1);
-		}
 	}
 	&__selects {
 		display: flex;
@@ -115,9 +118,13 @@ h1, h2, h3, h4, h5, h6 {
 	&__inner {
 		display: flex;
 		justify-content: space-around;
+		align-items: flex-start;
 	}
 	&__subtitle {
 		text-align: center;
+	}
+	&__btn {
+		margin-top: 100px;
 	}
 	&__table {
 		margin-top: 40px;
