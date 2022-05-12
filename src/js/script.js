@@ -29,31 +29,31 @@ window.addEventListener('DOMContentLoaded', () => {
 				copyBtn = document.querySelector('.result__btn');
 	
 	inputText.value = `первая строка ключевых строк\nвторая строка ключевых слов`;
-	outputText.value = ''; // text
+	outputText.value = '';
 
 	inputBtn.addEventListener('click', (e) => {
 		e.preventDefault();
 
-		outputText.value = ''; // text
+		outputText.value = '';
 
 		inputText.value.split(/\r?\n/).forEach(item => {
 
 			selects.forEach(select => {
 				switch (select.value) {
 					case 'first': 
-						outputText.value += first(item) + `\n`; // text
+						outputText.value += first(item) + `\n`;
 						break;
 					case 'second': 
-						outputText.value += second(item) + `\n`; // text
+						outputText.value += second(item) + `\n`;
 						break;
 					case 'third': 
-						outputText.value += third(item) + `\n`; // text
+						outputText.value += third(item) + `\n`;
 						break;
 					case 'fourth': 
-						outputText.value += fourth(item) + `\n`; // text
+						outputText.value += fourth(item) + `\n`;
 						break;
 					case 'fifth': 
-						outputText.value += fifth(item) + `\n`; // text
+						outputText.value += fifth(item) + `\n`;
 						break;
 					case 'none': return;
 				}

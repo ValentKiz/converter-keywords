@@ -1,6 +1,7 @@
 "use strict";
 
 const gulp = require("gulp");
+const webpack = require("webpack-stream");
 const browserSync = require("browser-sync");
 const sass = require('gulp-sass')(require('sass'));
 const cleanCSS = require('gulp-clean-css');
@@ -41,10 +42,64 @@ gulp.task('images', function () {
 			.pipe(browserSync.stream());
 });
 
-gulp.task('scripts', function () {
-	return gulp.src("src/js/*")
-			.pipe(gulp.dest(dist + 'scripts'))
-			.pipe(browserSync.stream());
+gulp.task("build-js", () => {
+	return gulp.src("./src/js/script.js")
+							.pipe(webpack({
+									mode: 'development',
+									output: {
+											filename: 'script.js'
+									},
+									watch: false,
+									devtool: "source-map",
+									module: {
+											rules: [
+												{
+													test: /\.m?js$/,
+													exclude: /(node_modules|bower_components)/,
+													use: {
+														loader: 'babel-loader',
+														options: {
+															presets: [['@babel/preset-env', {
+																	debug: true,
+																	corejs: 3,
+																	useBuiltIns: "usage"
+															}]]
+														}
+													}
+												}
+											]
+										}
+							}))
+							.pipe(gulp.dest(dist + 'scripts'))
+							.on("end", browserSync.reload);
+});
+
+gulp.task("build-prod-js", () => {
+	return gulp.src("./src/js/script.js")
+							.pipe(webpack({
+									mode: 'production',
+									output: {
+											filename: 'script.js'
+									},
+									module: {
+											rules: [
+												{
+													test: /\.m?js$/,
+													exclude: /(node_modules|bower_components)/,
+													use: {
+														loader: 'babel-loader',
+														options: {
+															presets: [['@babel/preset-env', {
+																	corejs: 3,
+																	useBuiltIns: "usage"
+															}]]
+														}
+													}
+												}
+											]
+										}
+							}))
+							.pipe(gulp.dest(dist + 'scripts'))
 });
 
 gulp.task("watch", () => {
@@ -54,15 +109,19 @@ gulp.task("watch", () => {
 		notify: true
     });
     
-		gulp.watch("./src/js/*.js", gulp.parallel("scripts"));
+		gulp.watch("./src/js/*.js", gulp.parallel("build-js"));
 		gulp.watch("./src/scss/**/*.+(scss|sass|css)", gulp.parallel('styles'));
     gulp.watch("./src/*.html").on('change', gulp.parallel('html'));
     gulp.watch("./src/fonts/**/*").on('all', gulp.parallel('fonts'));
     gulp.watch("./src/img/**/*").on('all', gulp.parallel('images'));
 });
 
-gulp.task("build", gulp.parallel('styles', 'fonts', 'html', 'images', 'scripts'));
+gulp.task("build", gulp.parallel('styles', 'fonts', 'html', 'images', 'build-js'));
+
+gulp.task("production", gulp.parallel('styles', 'fonts', 'html', 'images', 'build-prod-js'));
 
 gulp.task("default", gulp.parallel("watch", "build"));
+
+
 
 
